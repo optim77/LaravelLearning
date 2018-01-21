@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Http\Requests\CreateVideoRequest;
 use Request;
 use App\Video;
 use Auth;
+use Session;
+
 
 class VideosController extends Controller
 {
@@ -16,7 +19,6 @@ class VideosController extends Controller
     }
 
     public function index(){
-
         $videos = Video::latest()->get();
         return view('videos.index')->with('videos',$videos);
 
@@ -29,8 +31,8 @@ class VideosController extends Controller
 
 
     public function create(){
-
-        return view('videos.create');
+        $categories = Category::pluck('name','id');
+        return view('videos.create')->with('categories',$categories);
 
     }
 
@@ -38,13 +40,16 @@ class VideosController extends Controller
 
         $video = new Video($request->all());
         Auth::user()->videos()->save($video);
+        $categoryIds = $request->input('CategoryList');
+        $video->categories()->attach($categoryIds);
+        Session::flash('video_created','Videos was uploaded ');
         return redirect('videos');
     }
 
     public function edit($id){
-
+        $categories = Category::pluck('name','id');
         $video = Video::findOrFail($id);
-        return view('videos.edit')->with('video',$video);
+        return view('videos.edit',compact('video','categories'));
 
     }
 
@@ -52,6 +57,7 @@ class VideosController extends Controller
 
         $video = Video::findOrFail($id);
         $video->update($request->all());
+        $video->categories()->sync($request->input('CategoryList'));
         return redirect('videos');
 
     }

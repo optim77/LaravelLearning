@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','VideosController@index');
 
 Route::get('/contact',"Main@contact");
 Route::get('/about',"Main@about");

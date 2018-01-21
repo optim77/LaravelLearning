@@ -26,6 +26,8 @@
                     <a class="nav-item nav-link mx-2 lead text-danger px-3 hv" href="">Top</a>
                     <a class="nav-item nav-link mx-2 lead text-danger px-3 hv" href="/contact">Contact</a>
                     <a class="nav-item nav-link mx-2 lead text-danger px-3 hv" href="/about">About</a>
+                    <a class="nav-item nav-link mx-2 lead text-danger px-3 hv" href="{{url('login')}}">Login</a>
+                    <a class="nav-item nav-link mx-2 lead text-danger px-3 hv" href="{{url('register')}}">Register</a>
 
                 </div>
             </div>

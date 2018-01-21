@@ -14,4 +14,12 @@ class Video extends Model
         return $this->belongsTo('App\User');
     }
 
+    public function categories(){
+        return $this->belongsToMany('App\Category')->withTimestamps();
+    }
+
+    public function getCategoryListAttribute(){
+        return $this->categories->pluck('id')->all();
+    }
+
 }

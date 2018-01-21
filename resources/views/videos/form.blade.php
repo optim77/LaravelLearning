@@ -14,5 +14,10 @@
 </div>
 
 <div class="form-group">
+    {!! Form::label('categoryList','Category:') !!}
+    {!! Form::select('categoryList[]',$categories,null,['class' => 'form-control','multiple']) !!}
+</div>
+
+<div class="form-group">
     {!! Form::submit($buttonText,['class' => 'btn btn-info']) !!}
 </div>
